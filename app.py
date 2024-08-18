@@ -100,7 +100,6 @@ if address_file is not None:
                 errors.append({'address': address, 'error code': status_code})
 
         request_json['request_count'] = request_count
-        st.write(request_json)
         with open('request_counter.json', 'w') as file:
             json.dump(request_json, file, indent=4)
 
