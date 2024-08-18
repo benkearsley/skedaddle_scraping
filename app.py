@@ -62,38 +62,38 @@ if address_file is not None:
             errors = []
             if status_code == 200:
                 property = {
-                    'street_address': response.json()['streetAddress'],
-                    'city': response.json()['city'],
-                    'county': response.json()['county'],
-                    'zipcode': response.json()['zipcode'],
-                    'latitude': response.json()['latitude'],
-                    'longitude': response.json()['longitude'],
-                    'livingAreaUnits': response.json()['livingArea'],
-                    'living_area_units': response.json()['livingAreaUnits'],
-                    'num_bathrooms': response.json()['bathrooms'],
-                    'num_bedrooms': response.json()['bedrooms'],
-                    'hoa_fee': response.json()['monthlyHoaFee'],
-                    'annual_ho_insurance': response.json()['annualHomeownersInsurance'],
-                    'price': response.json()['price'],
-                    'zestimate': response.json()['zestimate'],
-                    'year_built': response.json()['yearBuilt'],
-                    'home_type': response.json()['homeType'],
-                    'has_attached_property': response.json()['resoFacts']['hasAttachedProperty'],
-                    'pool_features': response.json()['resoFacts']['poolFeatures'],
-                    'flooring': response.json()['resoFacts']['flooring'],
-                    'foundation_details': response.json()['resoFacts']['foundationDetails'],
-                    'has_garage': response.json()['resoFacts']['hasGarage'],
-                    'pets_allowed': response.json()['resoFacts']['hasPetsAllowed'],
-                    'exterior_features': response.json()['resoFacts']['exteriorFeatures'],
-                    'fireplace_status': response.json()['resoFacts']['hasFireplace'],
-                    'construction_materials': response.json()['resoFacts']['constructionMaterials'],
-                    'appliances': response.json()['resoFacts']['appliances'],
-                    'attic': response.json()['resoFacts']['attic'],
-                    'can_raise_horses': response.json()['resoFacts']['canRaiseHorses'],
-                    'sewer': response.json()['resoFacts']['sewer'],
-                    'parking_features': response.json()['resoFacts']['parkingFeatures'],
-                    'heating': response.json()['resoFacts']['heating'],
-                    'other_facts': response.json()['resoFacts']['otherFacts']
+                    'street_address': str(response.json()['streetAddress']),
+                    'city': str(response.json()['city']),
+                    'county': str(response.json()['county']),
+                    'zipcode': str(response.json()['zipcode']),
+                    'latitude': str(response.json()['latitude']),
+                    'longitude': str(response.json()['longitude']),
+                    'livingAreaUnits': str(response.json()['livingArea']),
+                    'living_area_units': str(response.json()['livingAreaUnits']),
+                    'num_bathrooms': str(response.json()['bathrooms']),
+                    'num_bedrooms': str(response.json()['bedrooms']),
+                    'hoa_fee': str(response.json()['monthlyHoaFee']),
+                    'annual_ho_insurance': str(response.json()['annualHomeownersInsurance']),
+                    'price': str(response.json()['price']),
+                    'zestimate': str(response.json()['zestimate']),
+                    'year_built': str(response.json()['yearBuilt']),
+                    'home_type': str(response.json()['homeType']),
+                    'has_attached_property': str(response.json()['resoFacts']['hasAttachedProperty']),
+                    'pool_features': str(response.json()['resoFacts']['poolFeatures']),
+                    'flooring': str(response.json()['resoFacts']['flooring']),
+                    'foundation_details': str(response.json()['resoFacts']['foundationDetails']),
+                    'has_garage': str(response.json()['resoFacts']['hasGarage']),
+                    'pets_allowed': str(response.json()['resoFacts']['hasPetsAllowed']),
+                    'exterior_features': str(response.json()['resoFacts']['exteriorFeatures']),
+                    'fireplace_status': str(response.json()['resoFacts']['hasFireplace']),
+                    'construction_materials': str(response.json()['resoFacts']['constructionMaterials']),
+                    'appliances': str(response.json()['resoFacts']['appliances']),
+                    'attic': str(response.json()['resoFacts']['attic']),
+                    'can_raise_horses': str(response.json()['resoFacts']['canRaiseHorses']),
+                    'sewer': str(response.json()['resoFacts']['sewer']),
+                    'parking_features': str(response.json()['resoFacts']['parkingFeatures']),
+                    'heating': str(response.json()['resoFacts']['heating']),
+                    'other_facts': str(response.json()['resoFacts']['otherFacts'])
                 } 
                 properties.append(property)
             else:
@@ -109,6 +109,8 @@ if address_file is not None:
         with property_tab:
             if len(properties) > 0:
                 properties_df = pd.DataFrame(properties)
+                for col in properties_df.columns:
+                    if properties_df[col] 
                 st.dataframe(properties_df)
 
         with error_tab:
