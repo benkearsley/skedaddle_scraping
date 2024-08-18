@@ -6,16 +6,16 @@ import json
 import openpyxl
 
 
-try:
-    with open('request_counter.json', 'r') as file:
-        request_json = json.load(file)
-    request_count = request_json['request_count']
-    current_month = datetime.today().month
-    if current_month > request_json['month']:
-        request_json['month'] = current_month
-        request_count = 0
-except:
-    request_count = 0
+# try:
+#     with open('request_counter.json', 'r') as file:
+#         request_json = json.load(file)
+#     request_count = request_json['request_count']
+#     current_month = datetime.today().month
+#     if current_month > request_json['month']:
+#         request_json['month'] = current_month
+#         request_count = 0
+# except:
+#     request_count = 0
 
 
 
@@ -27,9 +27,9 @@ headers = {
 
 
 
-st.write(f'This month {request_count} addresses have been scraped')
-bill = 0 if request_count <= 100 else (request_count - 100) * 0.04
-st.write(f'Total Rapid-API bill: ${bill:,.2f}')
+# st.write(f'This month {request_count} addresses have been scraped')
+# bill = 0 if request_count <= 100 else (request_count - 100) * 0.04
+# st.write(f'Total Rapid-API bill: ${bill:,.2f}')
 
 address_file = st.file_uploader('Upload a CSV or .xlsx file with addresses to collect data on')
 if address_file is not None:
@@ -56,7 +56,7 @@ if address_file is not None:
             querystring = {'address': address}
 
             response = requests.get(URL, headers=headers, params=querystring)
-            request_count += 1
+            # request_count += 1
             status_code = response.status_code
             
             errors = []
@@ -99,9 +99,9 @@ if address_file is not None:
             else:
                 errors.append({'address': address, 'error code': status_code})
 
-        request_json['request_count'] = request_count
-        with open('request_counter.json', 'w') as file:
-            json.dump(request_json, file, indent=4)
+        # request_json['request_count'] = request_count
+        # with open('request_counter.json', 'w') as file:
+        #     json.dump(request_json, file, indent=4)
 
         property_tab, error_tab = st.tabs(['Data', 'Errors'])
 
