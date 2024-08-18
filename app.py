@@ -109,8 +109,6 @@ if address_file is not None:
         with property_tab:
             if len(properties) > 0:
                 properties_df = pd.DataFrame(properties)
-                for col in properties_df.columns:
-                    if properties_df[col] 
                 st.dataframe(properties_df)
 
         with error_tab:
