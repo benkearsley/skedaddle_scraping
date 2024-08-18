@@ -110,6 +110,7 @@ if address_file is not None:
         with property_tab:
             if len(properties) > 0:
                 properties_df = pd.DataFrame(properties)
+                st.write(properties)
                 st.dataframe(properties_df)
 
         with error_tab:
