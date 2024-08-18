@@ -4,7 +4,6 @@ import pandas as pd
 from datetime import datetime 
 import json 
 import openpyxl
-from app_secrets import rapid_api_key, rapid_api_host
 
 
 try:
@@ -21,8 +20,8 @@ except:
 
 URL = "https://zillow-com1.p.rapidapi.com/property"
 headers = {
-    'x-rapidapi-key': rapid_api_key,
-    'x-rapidapi-host': rapid_api_host
+    'x-rapidapi-key': st.secrets['rapid_api_key'],
+    'x-rapidapi-host': st.secrets['rapid_api_host']
 }
 
 
