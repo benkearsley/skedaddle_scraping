@@ -6,16 +6,18 @@ import json
 import openpyxl
 
 
-try:
-    with open('request_counter.json', 'r') as file:
-        request_json = json.load(file)
-    request_count = request_json['request_count']
-    current_month = datetime.today().month
-    if current_month > request_json['month']:
-        request_json['month'] = current_month
-        request_count = 0
-except:
-    request_count = 0
+# try:
+#     with open('request_counter.json', 'r') as file:
+#         request_json = json.load(file)
+#     request_count = request_json['request_count']
+#     current_month = datetime.today().month
+#     if current_month > request_json['month']:
+#         request_json['month'] = current_month
+#         request_count = 0
+# except:
+#     request_count = 0
+
+request_count = st.secrets['num_requests']
 
 
 URL = "https://zillow-com1.p.rapidapi.com/property"
@@ -98,9 +100,10 @@ if address_file is not None:
             else:
                 errors.append({'address': address, 'error code': status_code})
 
-        request_json['request_count'] = request_count
-        with open('request_counter.json', 'w') as file:
-            json.dump(request_json, file, indent=4)
+        # request_json['request_count'] = request_count
+        # with open('request_counter.json', 'w') as file:
+        #     json.dump(request_json, file, indent=4)
+        st.secrets['num_requests'] = request_count
 
         property_tab, error_tab = st.tabs(['Data', 'Errors'])
 
