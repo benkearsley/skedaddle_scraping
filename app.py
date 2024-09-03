@@ -4,6 +4,8 @@ import pandas as pd
 from datetime import datetime 
 import json 
 import openpyxl
+# import app_secrets
+import time
 
 
 # try:
@@ -20,6 +22,11 @@ import openpyxl
 
 
 URL = "https://zillow-com1.p.rapidapi.com/property"
+# headers = {
+#     'x-rapidapi-key': app_secrets.rapid_api_key,
+#     'x-rapidapi-host': app_secrets.rapid_api_host
+# }
+
 headers = {
     'x-rapidapi-key': st.secrets['rapid_api_key'],
     'x-rapidapi-host': st.secrets['rapid_api_host']
@@ -53,11 +60,19 @@ if address_file is not None:
         addresses = list(set(address_df[address_column].tolist()))
         properties = []
         for address in addresses:
+            time.sleep(6)
             querystring = {'address': address}
 
             response = requests.get(URL, headers=headers, params=querystring)
             # request_count += 1
             status_code = response.status_code
+            print(f'{address}: {status_code}')
+            if status_code == 429:
+                time.sleep(10)
+                response - requests.get(URL, headers=headers, params=querystring)
+                status_code = response.status_code
+                print(f'attempt 2: {address}: {status_code}')
+
             
             errors = []
             if status_code == 200:
